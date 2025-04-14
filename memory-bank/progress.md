@@ -14,11 +14,13 @@
     *   Creation of `cursor-flatpay` Supabase project (`sujjdisymqakghervjzf`).
     *   Confirmation of Supabase connection.
     *   Phase 1, Step 1: Project Init, Supabase Setup, Git Repo.
+    *   Phase 1, Step 2 (Partial): DB Schema Implementation (Created Tables: societies, profiles, blocks, units, residents, expenses, recurring_charges, invoice_batches, invoices, invoice_items, payments; Created updated_at trigger).
+    *   Phase 1, Step 2 (Partial): RLS Enabled on tables.
 *   **In Progress:**
-    *   None (Ready for Phase 1, Step 2).
+    *   Phase 1, Step 3: Auth UI (Login, MFA, Context, Routes) - Initial setup: Routing, Placeholder Pages.
+    *   Phase 1, Step 2 (Partial): Define & Implement Profile Trigger, RLS Helper Functions, and RLS Policies.
 *   **To Do (Phase 1):**
-    *   Step 2: DB Schema Implementation + RLS/Triggers + Type Generation.
-    *   Step 3: Auth UI (Login, MFA, Context, Routes).
+    *   Step 3: Finish Auth UI (Context, Forms, MFA, Protected Routes).
     *   Step 4: Base Layout (Sidebar/Topbar).
     *   Step 5: Settings UI (Profile, Blocks, Charges CRUD).
     *   Step 6: Units UI (CRUD).
