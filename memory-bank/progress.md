@@ -17,7 +17,7 @@
     *   Phase 1, Step 2 (Partial): DB Schema Implementation (Created Tables: societies, profiles, blocks, units, residents, expenses, recurring_charges, invoice_batches, invoices, invoice_items, payments; Created updated_at trigger).
     *   Phase 1, Step 2 (Partial): RLS Enabled on tables.
 *   **In Progress:**
-    *   Phase 1, Step 3: Auth UI (Login, MFA, Context, Routes) - Initial setup: Routing, Placeholder Pages.
+    *   Phase 1, Step 3: Auth UI (Login, MFA Setup/Challenge, AuthContext, Protected Routes) - `LoginPage` UI built, but layout centering issue persists (requires browser dev tools investigation).
     *   Phase 1, Step 2 (Partial): Define & Implement Profile Trigger, RLS Helper Functions, and RLS Policies.
 *   **To Do (Phase 1):**
     *   Step 3: Finish Auth UI (Context, Forms, MFA, Protected Routes).
@@ -33,4 +33,4 @@
 *   **To Do (Phase 2 & Beyond):** See `buildSequence.md`.
 
 ## Known Issues
-*   None identified yet. Project setup phase.
+*   `LoginPage.tsx`: The main login card is not centering vertically or horizontally despite standard Tailwind centering classes (`flex items-center justify-center min-h-screen`) and CSS rules for parent height (`html, body, #root { height: 100%; }`). Needs investigation via browser dev tools.

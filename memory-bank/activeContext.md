@@ -4,16 +4,21 @@
 **Current Branch:** `feature/auth-ui`
 
 ## Current Focus
-*   Beginning Phase 1, Step 3: Auth UI (Login, MFA Setup/Challenge, AuthContext, Protected Routes).
-*   Setting up Supabase client, routing, and basic auth components.
+*   Phase 1, Step 3: Auth UI.
+*   **Paused:** Debugging layout issues with `LoginPage.tsx` - the login card is not centering correctly despite applying standard Tailwind CSS flexbox centering and ensuring parent element heights.
 
 ## Next Steps
-*   Install `react-router-dom`.
-*   Create placeholder pages/routes for Login (`/login`) and Signup (`/signup`).
-*   Set up `AuthContext` for session state management.
-*   Implement basic Login and Signup forms.
+*   Resume debugging the `LoginPage.tsx` layout issue.
+*   **Action:** Use browser developer tools to inspect the element hierarchy (`html`, `body`, `#root`, the component's wrapper `div`) and computed styles to identify conflicting CSS or height issues preventing `flex items-center justify-center min-h-screen` from working.
+*   Once layout is fixed, proceed with implementing MFA setup/challenge, and protected routes.
 
 ## Recent Changes
+*   Attempted to fix `LoginPage` centering by modifying `index.css` (removing body flex, adding height: 100% to html/body/#root).
+*   Resolved Vite path alias (`@/`) and Tailwind PostCSS plugin issues in `vite.config.ts` and `postcss.config.js`.
+*   Installed `@tailwindcss/postcss`.
+*   Added `Alert` component (`shadcn/ui`).
+*   Implemented basic `LoginPage.tsx` UI using `shadcn/ui` components and integrated `useAuth`.
+*   Committed AuthContext setup (`feat(auth): implement basic AuthContext and provider`).
 *   Committed UI library setup (`feat(ui): initialize shadcn/ui and configure tailwind css`).
 *   Switched to local branch `feature/auth-ui`.
 *   Committed Supabase client setup (`feat(core): setup supabase client and environment`).

@@ -1,12 +1,28 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Session, User } from '@supabase/supabase-js';
+import { Session, User, Provider } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabaseClient';
+
+// Define credential types (adjust as needed)
+interface EmailPasswordCredentials {
+  email?: string;
+  password?: string;
+  provider?: never; // Ensure provider is not used for email/password
+}
+
+interface ProviderCredentials {
+  provider: Provider;
+  email?: never; // Ensure email/password are not used for provider
+  password?: never;
+}
+
+type Credentials = EmailPasswordCredentials | ProviderCredentials;
 
 // Define the shape of the context data
 interface AuthContextType {
   session: Session | null;
   user: User | null;
   loading: boolean;
+  login: (credentials: Credentials) => Promise<{ error: Error | null }>;
   // Add login, signup, logout functions later
   // login: (credentials: Credentials) => Promise<void>;
   // signup: (credentials: Credentials) => Promise<void>;
@@ -50,11 +66,43 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
   }, []);
 
+  // Login function implementation
+  const login = async (credentials: Credentials): Promise<{ error: Error | null }> => {
+    setLoading(true); // Optional: Set loading state during login attempt
+    let error: Error | null = null;
+
+    try {
+      if (credentials.provider) {
+        // OAuth login
+        const { error: oauthError } = await supabase.auth.signInWithOAuth({ provider: credentials.provider });
+        if (oauthError) throw oauthError;
+        // Note: Redirection happens for OAuth, session update handled by listener
+      } else if (credentials.email && credentials.password) {
+        // Email/Password login
+        const { error: passwordError } = await supabase.auth.signInWithPassword({
+          email: credentials.email,
+          password: credentials.password,
+        });
+        if (passwordError) throw passwordError;
+        // Session update handled by listener
+      } else {
+        throw new Error('Invalid credentials provided for login');
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      error = err instanceof Error ? err : new Error('An unknown login error occurred');
+    }
+
+    setLoading(false);
+    return { error };
+  };
+
   // Define the context value
   const value = {
     session,
     user,
     loading,
+    login,
     // Implement functions later
     // login: async (credentials) => { /* ... */ },
     // signup: async (credentials) => { /* ... */ },

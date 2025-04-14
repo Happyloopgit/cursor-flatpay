@@ -3,16 +3,28 @@
 *(Derived from Spec v3.0, Section 7)*
 *(MVP Focus + Phase 2)*
 
-## 7.1. Onboarding & Setup
-*   **Flow:** Login -> MFA Setup -> Dashboard (prompt) -> Settings.
-*   **Settings Page (`/settings`):** Tabbed UI.
-    *   **Profile:** Edit Society details (Name, Address, Timezone, Due Days, Late Fee).
-    *   **Blocks:** CRUD UI for managing `society_blocks`.
-    *   **Charges:** CRUD UI for managing `recurring_charges`.
-    *   **Units:** CRUD UI for managing `units`. Assign Block via dropdown.
-    *   **Residents:** CRUD UI for managing `residents`. Assign Unit via dropdown. Validation (Email unique, Phone format, Active Resident/Unit check). Activate/Deactivate.
+## 7.1. Onboarding & Setup (MVP)
+*   **Signup & Profile Creation:**
+    *   User signs up using Supabase Auth (Email/Password).
+    *   A DB trigger automatically creates a corresponding `public.profiles` record.
+    *   The new profile defaults to `role = 'society_admin'` and `society_id = NULL`.
+*   **Initial Society Creation:**
+    *   After signup/login, the new admin user is prompted or navigates to create their society.
+    *   User fills in society details (Name, Address, etc.).
+    *   The application attempts to `INSERT` into the `public.societies` table.
+    *   RLS Policy allows this INSERT only if the user is `society_admin` and their `profiles.society_id` is currently `NULL`.
+*   **Profile Linking:**
+    *   Upon successful society creation, the application performs an `UPDATE` on `public.profiles` to set the user's `society_id` to the ID of the newly created society.
+*   **MFA Setup:**
+    *   User should be strongly encouraged or required to set up Multi-Factor Authentication (MFA/TOTP) via Supabase Auth settings for their account security.
+*   **Settings Page (`/settings`):** Tabbed UI for managing society data after creation.
+    *   **Profile:** Edit Society details (Name, Address, Timezone, Due Days, Late Fee). RLS allows update only if user is admin for *this* society.
+    *   **Blocks:** CRUD UI for managing `society_blocks` for the admin's society.
+    *   **Charges:** CRUD UI for managing `recurring_charges` for the admin's society.
+    *   **Units:** CRUD UI for managing `units` for the admin's society. Assign Block via dropdown.
+    *   **Residents:** CRUD UI for managing `residents` for the admin's society. Assign Unit via dropdown. Validation (Email unique, Phone format, Active Resident/Unit check). Activate/Deactivate.
     *   **(Phase 2) Utility Rates:** CRUD UI for managing `utility_rates`.
-    *   **Security:** MFA Management (Enroll/Disable).
+    *   **Security:** MFA Management (Enroll/Disable) for the logged-in user.
 
 ## 7.2. Expense Management
 *   **Flow:** Navigate to Expenses -> Add Expense (Modal) -> Fill Form -> Save. View List -> Edit/Delete.
