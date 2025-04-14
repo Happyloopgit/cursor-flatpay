@@ -1,17 +1,21 @@
 # FlatPay - Progress Tracker
 
-**Date:** 2024-07-16
+**Date:** 2024-07-16 (Updated: 2025-04-14)
 **Current Phase:** Phase 1 (Core Setup & Manual Flow - MVP)
 **Repository:** `https://github.com/Happyloopgit/cursor-flatpay.git`
+**Supabase Project ID:** `sujjdisymqakghervjzf`
 
 ## Status
 *   **Completed:**
     *   Initial documentation structuring into Memory Bank format.
     *   Creation of `cursor-flatpay` GitHub repository.
-    *   Pushing Memory Bank files (Batch 1/3) to the repository.
+    *   Pushing Memory Bank files to the repository.
+    *   Setup of local Git repository and sync with remote.
+    *   Creation of `cursor-flatpay` Supabase project (`sujjdisymqakghervjzf`).
+    *   Confirmation of Supabase connection.
     *   Phase 1, Step 1: Project Init, Supabase Setup, Git Repo.
 *   **In Progress:**
-    *   Pushing Memory Bank files (Batch 2/3) to the repository.
+    *   None (Ready for Phase 1, Step 2).
 *   **To Do (Phase 1):**
     *   Step 2: DB Schema Implementation + RLS/Triggers + Type Generation.
     *   Step 3: Auth UI (Login, MFA, Context, Routes).
